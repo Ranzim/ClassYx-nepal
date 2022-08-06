@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% load static %}
+{% load embed_video_tags %}
+{% block content %}
+<!-- Page Header Start -->
+<div class="page-header" style="background: url('img/banner1.jpg');">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="breadcrumb-wrapper">
+          <h2 class="product-title">{{ ads_detail.title }} Details</h2>
+          <!-- <ol class="breadcrumb">
+            <li><a href="#">Home /</a></li>
+            <li class="current">Details</li>
+          </ol> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Ads Details Start -->
+<div class="section-padding">
+  <div class="container">
+
+    <!-- Product Info Start -->
+    <div class="product-info row">
+      <div class="col-lg-7 col-md-12 col-xs-12 text-center">
+        <div class="details-box ads-details-wrapper">
+          {% if ads_photos.count > 1 %}
+          <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+            <!--Indicators-->
+            <ol class="carousel-indicators">
+              {% for p in ads_photos %}
+              <li data-target="#carousel-example-1z" data-slide-to="{{ forloop.counter0 }}"
+                class="{% if forloop.counter0 == 0 %} active {% endif %}"></li>
+              {% endfor %}
+            </ol>
+            <!--/.Indicators-->
+            <!--Slides-->
+            <div class="carousel-inner" role="listbox">
+              {% for p in ads_photos %}
+              <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
+                <img class="d-block w-100" src="{{p.image.url}}" alt="First slide">
+              </div>
+              {% endfor %}
+              <!--/First slide-->
+              <!--/.Slides-->
+              <!--Controls-->
+              <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+              <!--/.Controls-->
+            </div>
+          </div>
+          {% else %}
+                {% for p in ads_photos %}
+                {% if forloop.first %}
+                    <img class="img-fluid" src="{{ p.image.url }}" alt="">
+                {% endif %}
+                {% endfor %}
+          {% endif %}
+        </div>
+        {% if ads_detail.video %}
+        <!-- Button trigger modal -->
+        <button id="video-modal" type="button" class="btn btn-common btn-reply" data-toggle="modal"
+          data-target="#basicExampleModal">
+          <i class="lni-video"></i> Play Video
+        </button>
+        {% endif %}
+
+        <!-- Video Modal -->
+        <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                {% video ads_detail.video 'small' %}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col-lg-5 col-md-12 col-xs-12">
+
+        <div class="details-box">
+          <div class="ads-details-info">
+            <h2>{{ ads_detail.title }}</h2>
+            <div class="mb-2 ads-description">{{ ads_detail.description|safe }}</div>
+            <div class="details-meta">
+              <span><i class="lni-alarm-clock"></i> Posted: {{ ads_detail.date_created }}</span>
+              <!-- <span><a href="#"><i class="lni-map-marker"></i> {{ ads_detail.state }}</a></span> -->
+              <!-- <span><a href="#"><i class="lni-eye"></i> 299 View</a></span> -->
+            </div>
+          </div>
+          <ul class="advertisement mb-4">
+            <li>
+              <p>
+                <strong><i class="lni-user"></i> Seller:</strong> {{ ads_detail.author }}
+                <a class="link-small" href="{% url 'author-archive' ads_detail.author.pk %}">(See other ads by this
+                  seller)</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong><i class="lni-map-marker"></i> State:</strong> {{ ads_detail.state }}
+                <a class="link-small" href="{% url 'state-archive' ads_detail.state.slug %}">(See other ads in this
+                  state)</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong><i class="lni-map"></i> City:</strong> {{ ads_detail.city }}
+                <a class="link-small" href="{% url 'city-archive' ads_detail.city.slug %}">(See other ads in this
+                  city)</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong><i class="lni-folder"></i> Category:</strong> {{ ads_detail.category }}
+                <a class="link-small" href="{% url 'category-archive' ads_detail.category.slug %}">(See other ads in
+                  this category)</a>
+              </p>
+            </li>
+            <li>
+              <p><strong><i class="lni-archive"></i> Condition:</strong> {{ ads_detail.condition }}</p>
+            </li>
+            <li>
+              <p><strong><i class="lni-package"></i> Brand:</strong> <a href="#">{{ ads_detail.brand }}</a></p>
+            </li>
+          </ul>
+          <div class="ads-btn mb-4">
+            <a href="mailto:{{ ads_detail.author.user.email }}" class="btn btn-common btn-reply"><i class="lni-envelope"></i> {{ ads_detail.author.user.email }}</a>
+            <a href="tel:{{ ads_detail.phone }}" class="btn btn-common"><i class="lni-phone-handset"></i>{{ ads_detail.phone }} </a>
+          </div>
+          <!-- <div class="share">
+                <span>Share: </span>
+                <div class="social-link">  
+                  <a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
+                  <a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>
+                  <a class="linkedin" href="#"><i class="lni-linkedin-fill"></i></a>
+                  <a class="google" href="#"><i class="lni-google-plus"></i></a>
+                </div>
+              </div> -->
+        </div>
+      </div>
+    </div>
+    <!-- Product Info End -->
+
+    <!-- Product Description Start -->
+    <!-- <div class="description-info">
+          <div class="row">
+            <div class="col-lg-8 col-md-6 col-xs-12">
+              <div class="description">
+                <h4>Description</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+              <div class="short-info">
+                <h4>Short Info</h4>
+                <ul>
+                  <li><a href="#"><i class="lni-users"></i> More ads by <span>User</span></a></li>
+                  <li><a href="#"><i class="lni-printer"></i> Print this ad</a></li>
+                  <li><a href="#"><i class="lni-reply"></i> Send to a friend</a></li>
+                  <li><a href="#"><i class="lni-warning"></i> Report this ad</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div> -->
+    <!-- Product Description End -->
+
+  </div>
+</div>
+<!-- Ads Details End -->
+
+{% endblock content %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <!-- Page Header Start -->
+    <div class="page-header" style="background: url('img/banner1.jpg');">
+      <div class="container">
+        <div class="row">         
+          <div class="col-md-12">
+            <div class="breadcrumb-wrapper">
+              <h2 class="product-title">Join Us</h2>
+              <!-- <ol class="breadcrumb">
+                <li><a href="#">Home /</a></li>
+                <li class="current">Register</li>
+              </ol> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page Header End -->  
+
+    <!-- Content section Start --> 
+    <section class="register section-padding">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 col-md-12 col-xs-12">
+            <div class="register-form login-area">
+              <h3>
+                Register
+              </h3>
+              <form method="POST" class="login-form">
+                {% csrf_token %}
+                <div class="form-group">
+                  <div class="input-icon">
+                    <i class="lni-user"></i>
+                    <!-- <input type="text" id="Name" class="form-control" name="email" placeholder="Username"> -->
+                    {{ reg_form.username }}
+                    {{ reg_form.username.errors }}
+                  </div>
+                </div> 
+                <div class="form-group">
+                  <div class="input-icon">
+                    <i class="lni-envelope"></i>
+                    <!-- <input type="text" id="sender-email" class="form-control" name="email" placeholder="Email Address"> -->
+                    {{ reg_form.email }}
+                    {{ reg_form.email.errors }}
+                    
+                  </div>
+                </div> 
+                <div class="form-group">
+                  <div class="input-icon">
+                    <i class="lni-lock"></i>
+                    <!-- <input type="password" class="form-control" placeholder="Password"> -->
+                    {{ reg_form.password1 }}
+                    {{ reg_form.password1.errors }}
+                  </div>
+                </div>  
+                <div class="form-group">
+                  <div class="input-icon">
+                    <i class="lni-lock"></i>
+                    <!-- <input type="password" class="form-control" placeholder="Retype Password"> -->
+                    {{ reg_form.password2 }}
+                    {{ reg_form.password2.errors }}
+                  </div>
+                </div>  
+                <div class="signup-notice mb-3"> 
+                    <p class="text-center">By registering, you accept our <a href="{% url 'terms-of-service' %}">Terms & Conditions</a> </p>
+                  </div>
+                </div>   
+                <div class="text-center">
+                  <button type="submit" class="btn btn-common log-btn">Register</button>
+                </div>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Content section End --> 
+
+    {% endblock content %}

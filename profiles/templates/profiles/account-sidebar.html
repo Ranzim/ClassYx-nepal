@@ -1,0 +1,65 @@
+{% load static %}
+<!-- Account Sidebar Start -->
+<div class="col-sm-12 col-md-4 col-lg-3 page-sidebar">
+  <aside>
+    <div class="sidebar-box">
+      <div class="user">
+        <figure>
+          <a href="#"><img style="width: 100px;" src="{{ request.user.author.profile_pic.url }}" alt="" class="rounded-circle"></a>
+        </figure>
+        <div class="usercontent">
+          <h3>{{ user.username }}</h3>
+        </div>
+        <div class="user-info">
+          <p><i class="lni-envelope"></i> Email @ {{ user.email }}</p>
+          <p><i class="lni-calendar"></i> Joined @ {{ user.date_joined|date }}</p>
+        </div>
+        
+
+      </div>
+      <nav class="navdashboard">
+        <ul>
+          <li>
+            <a class="active" href="{% url 'dashboard' %}">
+              <i class="lni-dashboard"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'profile-settings' %}">
+              <i class="lni-cog"></i>
+              <span>Account Settings</span>
+            </a>
+          </li>
+          <!-- <li>
+            <a href="{% url 'profile-ads' %}">
+              <i class="lni-layers"></i>
+              <span>My Ads</span>
+            </a>
+          </li>
+
+
+          <li>
+            <a href="{% url 'profile-favorite-ads' %}">
+              <i class="lni-heart"></i>
+              <span>Favourite Ads</span>
+            </a>
+          </li> -->
+          <li>
+            <a href="{% url 'logout' %}">
+              <i class="lni-enter"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+          <!-- <li>
+            <a href="{% url 'profile-close' %}">
+              <i class="lni-close"></i>
+              <span>Account close</span>
+            </a>
+          </li> -->
+        </ul>
+      </nav>
+    </div>
+  </aside>
+</div>
+<!-- Account Sidebar End -->

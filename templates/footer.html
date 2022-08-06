@@ -1,0 +1,145 @@
+{% load static %}
+<!-- Footer Section Start -->
+<footer>
+    <!-- Footer Area Start -->
+    <section class="footer-Content">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+            <div class="widget">
+              <h3 class="footer-logo"><img src="{% static 'images/lo.png' %}" alt=""></h3>
+              <div class="textwidget">
+                <p>Buy And Sell Everything From ClassYx-nepal, Firearms, Merchandise
+                  </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+            <div class="widget">
+              <h3 class="block-title">Latest Ads</h3>
+              <ul class="media-content-list">
+                
+                <li>
+                  {% for ad in footer_recent_ads %}
+
+                  <div class="media-left">
+                    {% for img in ad.adsimages_set.all %}
+                    <img class="img-fluid" src="{{ img.image.url }}" alt="">
+                    {% endfor %}
+                    
+                  </div>
+                  <div class="media-body">
+                    <h4 class="post-title"><a href="{% url 'ads-detail' ad.id %}">{{ ad.title }}</a></h4>
+                    <span class="date">{{ ad.date_created|date }}</span>
+                  </div>
+                </li>
+                {% endfor %}
+                
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+            <div class="widget">
+              <h3 class="block-title">Help & Support</h3>
+              <ul class="menu">
+              
+                <li><a href="{% url 'faq' %}">Blogs</a></li>
+                <li><a href="{% url 'contact' %}">Contact us</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+            <div class="widget">
+              <h3 class="block-title">Connect with us</h3>
+              <p class="text-sub">We have years of experience and our agents are avalable to help you 24 hours a day, seven days week.</p>
+              <!-- <form method="post" id="subscribe-form" name="subscribe-form" class="validate">
+                <div class="form-group is-empty">
+                  <input type="email" value="" name="Email" class="form-control" id="EMAIL" placeholder="Email address" required="">
+                  <button type="submit" name="subscribe" id="subscribes" class="btn btn-common sub-btn"><i class="lni-check-box"></i></button>
+                  <div class="clearfix"></div>
+                </div>
+              </form>  -->
+              <ul class="footer-social">
+                <li><a class="facebook" target="blank" href="https://www.facebook.com/"><i class="lni-facebook-filled"></i></a></li>
+              
+                <li><a class="linkedin" target="blank" href="https://www.linkedin.com/"><i class="lni-linkedin-fill"></i></a></li>
+              
+              </ul>          
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer area End -->
+    
+    <!-- Copyright Start  -->
+    <div id="copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="site-info float-left">
+              <p>Copyright &copy; {% now "Y" %} karmainformatica.com | All rights reserved </p>
+            </div>              
+            <div class="float-right"> 
+              <p>Technical support by karma Teams</a></p> 
+              <!-- <ul class="bottom-card">
+
+                <li>
+                    <a href="#"><img src="{% static 'img/footer/card1.jpg' %}" alt="card"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="{% static 'img/footer/card2.jpg' %}" alt="card"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="{% static 'img/footer/card3.jpg' %}" alt="card"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="{% static 'img/footer/card4.jpg' %}" alt="card"></a>
+                </li>
+              </ul> -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Copyright End -->
+
+  </footer>
+  <!-- Footer Section End --> 
+
+  <!-- Go to Top Link -->
+  <a href="#" class="back-to-top">
+    <i class="lni-chevron-up"></i>
+  </a>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader" id="loader-1"></div>
+  </div>
+  <!-- End Preloader -->
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="{% static 'js/jquery-min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+  <script src="{% static 'js/waypoints.min.js' %}"></script>
+  <script src="{% static 'js/wow.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/nivo-lightbox.js' %}"></script>
+  <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+  <script src="{% static 'js/form-validator.min.js' %}"></script>
+  <script src="{% static 'js/contact-form-script.min.js' %}"></script>
+  <script src="{% static 'js/summernote.js' %}"></script>
+  
+  <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+  
+  <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+
+  <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+
+  <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+<!-- Page Header Start -->
+<div class="page-header" style="background: url('img/banner1.jpg');">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="breadcrumb-wrapper">
+          <h2 class="product-title">Post your Ads</h2>
+          <!-- <ol class="breadcrumb">
+            <li><a href="#">Home /</a></li>
+            <li class="current">Post your Ads</li>
+          </ol> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Start Content -->
+<div id="content" class="section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+
+      <div class="col-lg-5 col-md-12 col-xs-12">
+        {% if request.user.is_authenticated %}
+        <div class="row page-content">
+          <form action="" class="ads-form" id="ad-post-form">
+
+            <label>Product Title <span class="req-aseteric">*</span></label>
+            <input type="text" id="title" class="form-control ad-post-form"
+              placeholder="e.g. Hunting Binoculars for Sale">
+            <div class="error-msg">
+              <div id="titlemsg"></div>
+            </div>
+
+            <label>Product Description <span class="req-aseteric">*</span></label>
+            <textarea rows="6" id="description" class="form-control ad-post-form"
+              placeholder="Provide as much detail as possible"></textarea>
+            <div class="error-msg">
+              <div id="descriptionmsg"></div>
+            </div>
+
+            <label>Select Ads Category <span class="req-aseteric">*</span></label>
+            <div class="select ad-post-form">
+              <select id="category" name="category" class="form-control">
+                <option value="Archery">Archery</option>
+                <option value="Aviation services">Aviation services</option>
+                <option value="Blinds & Stands">Blinds & Stands</option>
+                <option value="Breeder bucks & Breeding services">Breeder bucks & Breeding services</option>
+                <option value="Business for sale">Business for sale</option>
+                <option value="Camouflage & Outerwear">Camouflage & Outerwear</option>
+                <option value="Exotics for sale & Exotics wanted">Exotics for sale & Exotics wanted</option>
+                <option value="Feeders">Feeders</option>
+                <option value="Fire arm accessories">Fire arm accessories</option>
+                <option value="Footwear">Footwear</option>
+                <option value="Game calls">Game calls</option>
+                <option value="Guide jobs, Ranch manager jobs & camp staff">Guide jobs, Ranch manager jobs & camp staff
+                </option>
+                <option value="Gun safes">Gun safes</option>
+                <option value="Hunting dogs for sale & training">Hunting dogs for sale & training</option>
+                <option value="Hunting land for lease & leases wanted">Hunting land for lease & leases wanted</option>
+                <option value="Hunting property for sale">Hunting property for sale</option>
+                <option value="Hunting vehicles & ATVs for sale">Hunting vehicles & ATVs for sale</option>
+                <option value="Merchandise">Merchandise</option>
+                <option value="Outfitter Operations (Find a hunt)">Outfitter Operations (Find a hunt)</option>
+                <option value="Property improvements & services">Property improvements & services</option>
+                <option value="Traps and Trapping services">Traps and Trapping services</option>
+                <option value="Waterfowl">Waterfowl</option>
+                <option value="Wildlife Biology and Surveying">Wildlife Biology and Surveying</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+              </select>
+            </div>
+            <div class="error-msg">
+              <div id="categorymsg"></div>
+            </div>
+
+            <label>Product Price <span class="req-aseteric">*</span> <span class="h-text"> (Value should be numeric.
+                Don't put $ sign.)</span></label>
+            <input type="number" id="price" class="form-control ad-post-form" placeholder="e.g. 2500">
+            <div class="error-msg">
+              <div id="pricemsg"></div>
+            </div>
+
+            <label>Select Product Condition <span class="req-aseteric">*</span></label>
+            <div class="select ad-post-form">
+              <select id="condition" name="condition" class="form-control">
+                <option value="Excellent">Excellent</option>
+                <option value="Good">Good</option>
+                <option value="Fair">Fair</option>
+              </select>
+            </div>
+            <div class="error-msg">
+              <div id="conditionmsg"></div>
+            </div>
+
+            <label>Select Your State <span class="req-aseteric">*</span></label>
+            <div class="select ad-post-form">
+              <select id="state" name="state" class="form-control">
+
+                <option value="Alabama">Bagmati</option>
+  
+                <option value="Wyoming">Gandaki</option>
+              </select>
+            </div>
+            <div class="error-msg">
+              <div id="statemsg"></div>
+            </div>
+
+            <label>Your City <span class="req-aseteric">*</span></label>
+            <input type="text" id="city" class="form-control ad-post-form" placeholder="e.g. Houston">
+
+            <label>Address <span class="req-aseteric">*</span></label>
+            <input type="text" id="address" class="form-control ad-post-form" placeholder="e.g. Baneshwor ">
+
+            <div class="error-msg">
+              <div id="citymsg"></div>
+            </div>
+
+            <label>Product Brand <span class="h-text">(Leave empty if not applicable)</span></label>
+            <input type="text" id="brand" class="form-control ad-post-form" placeholder="e.g. Bushnell">
+            <div class="error-msg">
+              <div id="brandmsg"></div>
+            </div>
+
+            
+
+            <label>Your Phone no. <span class="req-aseteric">*</span></label>
+            <input type="text" id="phone" class="form-control ad-post-form" placeholder="Provide your best contact no.">
+            <div class="error-msg">
+              <div id="phonemsg"></div>
+            </div>
+
+            <label>Post Video Url <span class="h-text"> (Don't post embed link. Leave empty if not
+                applicable)</span></label>
+            <input type="url" id="video" class="form-control ad-post-form"
+              placeholder="e.g. https://www.youtube.com/watch?v=ooHvPr4Bk4I">
+            <label>Post Product Picture <span class="h-text"> (Max. 5 pictures. File size should be less than 3MB.
+                Allowed file type jpeg, jpg & png.) </span></label>
+
+            <input type="file" multiple>
+
+            <button type="button" id="saveBtn" class="btn btn-common log-btn">Post Ad</button>
+          </form>
+        </div>
+
+        <div class="success-msg">
+          <div id="formsuccessmsg" class="text-center"></div>
+        </div>
+
+        <div class="error-msg">
+          <div id="formerrmsg" class="text-center"></div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Content -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var files = []
+    FilePond.registerPlugin(FilePondPluginFileValidateSize);
+    FilePond.registerPlugin(FilePondPluginFileValidateType);
+    FilePond.setOptions({
+      allowMultiple: true,
+      maxFiles: 5,
+      maxFileSize: '3MB'
+    })
+    const inputElement = document.querySelector('input[type="file"]');
+    const pond = FilePond.create(inputElement, {
+      acceptedFileTypes: ['image/png', 'image/jpeg'],
+      onaddfile: (err, fileItem) => {
+        if (!err) {
+          files.push(fileItem.file)
+        }
+        console.log(files)
+      },
+      onremovefile: (err, fileItem) => {
+        const index = files.indexOf(fileItem.file)
+        if (index > -1) {
+          files.splice(index, 1)
+        }
+        console.log(files)
+      }
+    });
+
+    var formData = new FormData();
+    $(document).on('click', '#saveBtn', function (e) {
+
+      if ($('#title').val() === "") {
+        $("#titlemsg").html("<div class='alert alert-danger'>Title can not be empty</div>");
+      }
+
+      if ($('#description').val() === "") {
+        $("#descriptionmsg").html("<div class='alert alert-danger'>Description can not be empty</div>");
+      }
+
+      if ($('#category').val() === "") {
+        $("#categorymsg").html("<div class='alert alert-danger'>Category can not be empty</div>");
+      }
+
+      if ($('#price').val() === "") {
+        $("#pricemsg").html("<div class='alert alert-danger'>Price can not be empty & must be numeric</div>");
+      }
+
+      if ($('#condition').val() === "") {
+        $("#conditionmsg").html("<div class='alert alert-danger'>Condition can not be empty</div>");
+      }
+
+      if ($('#state').val() === "") {
+        $("#statemsg").html("<div class='alert alert-danger'>State can not be empty</div>");
+      }
+
+      if ($('#city').val() === "") {
+        $("#citymsg").html("<div class='alert alert-danger'>City can not be empty</div>");
+      }
+
+      if ($('#phone').val() === "") {
+        $("#phonemsg").html("<div class='alert alert-danger'>You must provide a phone no.</div>");
+      }
+
+
+      formData.append('length', files.length)
+      formData.append('title', $('#title').val())
+      formData.append('description', $('#description').val())
+      formData.append('category', $('#category').val())
+      formData.append('price', $('#price').val())
+      formData.append('condition', $('#condition').val())
+      formData.append('state', $('#state').val())
+      formData.append('city', $('#city').val())
+      formData.append('brand', $('#brand').val())
+      formData.append('phone', $('#phone').val())
+      formData.append('video', $('#video').val())
+      for (var i = 0; i < files.length; i++) {
+        formData.append('images' + i, files[i])
+      }
+
+
+      formData.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
+      $.ajax({
+        type: 'POST',
+        url: '{% url "post-ads" %}',
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        enctype: 'multipart/form-data',
+        success: function () {
+          $("#formsuccessmsg").html(
+            "<div class='alert alert-success'>The Ad has been posted successfully and   waiting for approval by Admin.</div>"
+          );
+          // alert('The Ads has been posted successfully!')
+          $('#ad-post-form').each(function () {
+            this.reset(); //Here form fields will be cleared.
+          });
+          
+        },
+        error: function (xhr, errmsg, err) {
+          $("#formerrmsg").html(
+            "<div class='alert alert-danger'>You have one or more error. Please provide all required fields to post ad.</div>"
+          );
+          // console.log(xhr.status + ":" + xhr.responseText)
+          // alert('Failed to post. Make sure you fill all the fields')
+
+
+        }
+      })
+    })
+    console.log(formData)
+  })
+</script>
+{% endblock content %}

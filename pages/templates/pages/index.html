@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Filter Area Start -->
+<div id="hero-area">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xs-12 text-center">
+        <div class="contents">
+          <h1 class="head-title">Welcome to <span class="year">ClassYX-nepal</span></h1>
+          <p>Buy And Sell Everything From ClassYX-nepal</p>
+          <div class="search-bar">
+            <div class="search-inner">
+              <form method="GET" class="search-form" action="{% url 'ads-search' %}">
+                <!-- <div class="form-group inputwithicon">
+                  <i class="lni-tag"></i>
+                  <input type="text" name="customword" class="form-control" placeholder="Enter Product Keyword">
+                </div> -->
+                <div class="form-group inputwithicon">
+                  <i class="lni-map-marker"></i>
+                  <div class="select">
+                    <select name="state_name">
+                      <option selected="true" disabled="disabled">Select State</option>
+                      {% for state_name in state_search %}
+                      <option value="{{ state_name }}">{{ state_name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group inputwithicon">
+                  <i class="lni-menu"></i>
+                  <div class="select">
+                    <select name="category_name">
+                      <option selected="true" disabled="disabled">Select Category</option>
+                      {% for category_name in category_search %}
+                      <option value="{{ category_name }}">{{ category_name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <button class="btn btn-common" type="submit"><i class="lni-search"></i> Search Now</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Filter Area End -->
+
+<!-- Advertisement Top Banner Area Start -->
+<!-- <section class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="section-title">Advertisement</h3>
+        {% for banner in top_banner%}
+        <img src="{{ banner.image.url }}" class="top-banner-img" alt="">
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section> -->
+<!-- Advertisements Top Banner Area End -->
+
+<!-- Main Area Start -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-xs-12">
+      <!-- Featured Ads Listings Starts -->
+      <section id="featured" class="section-padding">
+        <h1 class="section-title">Featured Classifieds</h1>
+        <hr>
+        <div class="row">
+          <div class="container-fluid">
+          {% for featured_ad in featured_ads %}
+          <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <div class="featured-box">
+
+              <figure>
+
+                {% for img in featured_ad.adsimages_set.all %}
+                {% if forloop.first %}
+                <a href="{% url 'ads-detail' featured_ad.id %}"><img class="img-fluid" src="{{ img.image.url }}"
+                    alt=""></a>
+                {% endif %}
+                {% endfor %}
+
+              </figure>
+
+              <div class="feature-content">
+                <div class="product">
+                  <a href="{% url 'category-archive' featured_ad.category.slug %}"><i class="lni-folder"></i>
+                    {{ featured_ad.category }}</a>
+                </div>
+                <h4><a href="{% url 'ads-detail' featured_ad.id %}">{{ featured_ad.title }}</a></h4>
+                <span>Posted at: {{ featured_ad.date_created }}</span>
+                
+                  <div class="row product-user-details">
+                    <div class="col-6 " id="detailss">
+                    
+                      <i class="lni-map-marker"></i>{{ featured_ad.city }}, {{ featured_ad.state }}
+                      <br>
+                      <i class="lni-user"></i> {{ featured_ad.author }}
+                    </div>
+                    <div class="col-6 " id="detailss">
+                      <i class="lni-alarm-clock"></i> {{ featured_ad.date_created|date }}
+                      <br>
+                      <i class="lni-package"></i> {{ featured_ad.condition }}
+                     
+                    </div>
+                  </div>
+                 
+             
+                <div class="listing-bottom">
+                  <h3 class="price float-left">$ {{ featured_ad.price }}</h3>
+                  <p href="#" class="btn-verified float-right"><i class="lni-check-box"></i>
+                    Verified Ad</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          </div>
+        </div>
+      </section>
+      <!-- Featured Ads Listings Ends -->
+
+      <!-- Browse by Category Start -->
+      <section class="section-padding">
+        <div class="container-fluid">
+          <h1 class="section-title">Browse Classifieds by Category</h1>
+          <hr>
+          <div class="row">
+            {% for category in category_listing %}
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+              <a style="font-size: 18px; color: #89613A; line-height: 2;" href="{% url 'category-archive' category.slug %}">
+                <i class="lni-folder"></i>
+                {{ category }}
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+      <!-- Browse by Category End -->
+
+      <!-- Browse by State Start -->
+      <!-- <section class="section-padding">
+        <div class="container">
+          <h1 class="section-title">Browse Classifieds by State</h1>
+          <hr>
+          <div class="row">
+            {% for state in state_listing %}
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3">
+              <a style="font-size: 18px; color: #89613A;" href="{% url 'state-archive' state.slug %}">
+                <i class="lni-map-marker"></i>
+                {{ state }}
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section> -->
+      <!-- Browse by State End -->
+
+      <!-- Latest Ads Listing Section Start -->
+      <section class="featured section-padding">
+        <div class="container">
+          <h1 class="section-title">Latest Classifieds</h1>
+          <hr>
+          <div class="row">
+            {% for recent_ad in recent_ads %}
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+              <div class="featured-box">
+
+                <figure>
+                  
+                  <a href="{% url 'ads-detail' recent_ad.id %}">
+                    {% for img in recent_ad.adsimages_set.all %}
+                    {% if forloop.first %}
+                    <img class="img-fluid" src="{{ img.image.url }}" alt="">
+                    {% endif %}
+                    {% endfor %}
+                  </a>
+                </figure>
+
+                <div class="feature-content">
+                  <div class="product">
+                    <a href="{% url 'category-archive' recent_ad.category.slug %}"><i
+                        class="lni-folder"></i>{{ recent_ad.category }}</a>
+                  </div>
+                  <h4><a href="{% url 'ads-detail' recent_ad.id %}">{{ recent_ad.title}}</a></h4>
+                  <span>Posted at: {{ recent_ad.date_created}}</span>
+
+                  <div class="row product-user-details">
+                    <div class="col-6 " id="detailss">
+                    
+                      <i class="lni-map-marker"></i>{{ recent_ad.city }}, {{ recent_ad.state }}
+                      <br>
+                      <i class="lni-user"></i> {{ recent_ad.author  }}
+                    </div>
+                    <div class="col-6 " id="detailss">
+                      <i class="lni-alarm-clock"></i> {{ recent_ad.date_created | date}}
+                      <br>
+                      <i class="lni-package"></i> {{ recent_ad.condition }}
+                     
+                    </div>
+                  </div>
+                 
+                  <!-- <ul class="address">
+                    
+                    <li>
+                      <i class="lni-map-marker"></i>{{ recent_ad.city}}, {{ recent_ad.state}}
+                    </li>
+                    <li>
+                      <i class="lni-alarm-clock"></i>{{ recent_ad.date_created | date}}
+                    </li>
+                    <li>
+                      <i class="lni-user"></i> {{ recent_ad.author }}
+                    </li>
+                    <li>
+                      <i class="lni-package"></i>{{ recent_ad.condition }}
+                    </li>
+                  </ul> -->
+                  <div class="listing-bottom">
+                    <h3 class="price float-left">$ {{ recent_ad.price }}</h3>
+                    <p class="btn-verified float-right"><i class="lni-check-box"></i> Verified
+                      Ad</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+        </div>
+      </section>
+      <!-- Latest Ads Listing Section End -->
+    </div>
+
+    <!-- Place Your Ad Start -->
+    <!-- <div class="col-lg-3 col-md-12 col-xs-12">
+      {% for banner in sidebar_banners %}
+      <div class="futere-ad-widget">
+        <img src="{{ banner.image.url }}" alt="">
+        <div class="ctl-content-wrapper">
+          <div class="ctl-content">
+            <h3 class="text-center">{{ banner.title }}</h3>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div> -->
+    <!-- Place Your Ad End -->
+  </div>
+</div>
+<!-- Main Area End -->
+
+<!-- Advertisement Top Banner Area Start -->
+<section class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="section-title">Advertisement</h3>
+        <hr>
+        {% for banner in bottom_banner%}
+        <img src="{{ banner.image.url }}" class="top-banner-img img-fluid" alt="">
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Advertisements Top Banner Area End -->
+
+
+{% endblock content %}
